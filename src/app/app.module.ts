@@ -1,16 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import remotedev from 'mobx-remotedev';
 
+import { MobxAngularModule } from 'mobx-angular';
+import { Todos } from './stores/todos.store';
 import { AppComponent } from './app.component';
+import { SectionComponent } from './components/section/section.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CountComponent } from './components/count/count.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SectionComponent,
+    FooterComponent,
+    CountComponent
   ],
-  imports: [
-    BrowserModule
+  // TODO: import MobxAngularModule
+  imports: [BrowserModule, FormsModule, MobxAngularModule],
+  providers: [
+    // TODO: debugging with redux dev tools
+    { provide: Todos, useClass: remotedev(Todos, { global: true }), deps: [] }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
